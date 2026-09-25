@@ -1,12 +1,16 @@
 # Pedidos360 - Arquitectura Cloud Native
 
 Este proyecto implementa la arquitectura base del sistema **Pedidos360**, demostrando una integración segura y escalable entre un frontend en **Angular 17**, un backend en **Spring Boot** alojado en **AWS EC2**, un proxy de entrada en **AWS API Gateway (HTTP API)** y gestión de identidades con **Amazon Cognito (IDaaS)**.
+
 ---
 ## links
 
 http://localhost:4200/
+
 http://34.195.89.36:8080/api/pedidos
+
 https://qftpn0meq9.execute-api.us-east-1.amazonaws.com/api/pedidos
+
 
 ---
 ## comandos ec2
