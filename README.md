@@ -3,6 +3,14 @@
 Este proyecto implementa la arquitectura base del sistema **Pedidos360**, demostrando una integración segura y escalable entre un frontend en **Angular 17**, un backend en **Spring Boot** alojado en **AWS EC2**, un proxy de entrada en **AWS API Gateway (HTTP API)** y gestión de identidades con **Amazon Cognito (IDaaS)**.
 
 ---
+## comandos ec2
+
+nohup java -Dspring.security.oauth2.resourceserver.jwt.issuer-uri=https://cognito-idp.us-east-1.amazonaws.com/us-east-1_XqYEyzU4Y -jar app.jar > app.log 2>&1 &
+tail -f app.log
+
+sudo kill -9 $(sudo lsof -t -i:8080
+
+---
 
 ##  Arquitectura del Sistema
 
