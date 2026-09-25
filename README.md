@@ -1,0 +1,33 @@
+# Pedidos360 - Arquitectura Cloud Native
+
+Este proyecto implementa la arquitectura base del sistema **Pedidos360**, demostrando una integración segura y escalable entre un frontend en **Angular 17**, un backend en **Spring Boot** alojado en **AWS EC2**, un proxy de entrada en **AWS API Gateway (HTTP API)** y gestión de identidades con **Amazon Cognito (IDaaS)**.
+
+---
+
+##  Arquitectura del Sistema
+
+1. **Frontend (Angular 17 + AWS Amplify v6):** 
+   * Maneja el flujo de autenticación mediante OIDC / OAuth 2.0 (Authorization Code Grant con PKCE).
+   * Adjunta el token de acceso JWT (`Bearer`) a las peticiones mediante un `HttpInterceptorFn`.
+2. **IDaaS (Amazon Cognito User Pool):**
+   * Gestiona el registro e inicio de sesión de usuarios mediante Hosted UI.
+   * Define Custom Scopes (`pedidos360-api/pedidos-api-read`) para autorización basada en roles.
+3. **API Gateway (AWS HTTP API):**
+   * Actúa como Reverse Proxy e intermediario entre el cliente web y la infraestructura privada.
+   * Resuelve solicitudes Pre-flight mediante la ruta `OPTIONS /{proxy+}` con configuración estricta de CORS.
+4. **Backend (Spring Boot en AWS EC2):**
+   * Configurado como **OAuth2 Resource Server** (Defense in Depth).
+   * Valida la firma criptográfica y el emisor (`issuer-uri`) del JWT directamente contra Cognito.
+
+---
+
+##  Mapeo de Puntos de Evaluación (Rúbrica)
+
+| Componente | Configuración Implementada |
+|---|---|
+| **Rutas API Gateway** | `GET /api/pedidos` integrando al backend EC2 en puerto 8080. |
+| **CORS** | Configurado para permitir origen `http://localhost:4200` y cabeceras `Authorization`. |
+| **Tenant IDaaS** | User Pool `us-east-1_XqYEyzU4Y` registrado en la región `us-east-1`. |
+| **App Client** | Client ID `4go4kv0bh96di7cfcm9d3abhoo` habilitado con PKCE. |
+| **Validación JWT** | Validación de token efectuada en la capa del Resource Server (Spring Security). |
+
